@@ -10,7 +10,8 @@ PYTEST_RUNNER = ['pytest-runner'] if 'test' in sys.argv else []
 
 
 def read(fpath):
-    return io.open(fpath).read()
+    # Explicitly declare UTF-8 to avoid platform-dependent decoding errors on Windows
+    return io.open(fpath, encoding='utf-8').read()
 
 
 def get_version():
@@ -23,7 +24,8 @@ def get_version():
 
     """
     contents = read(os.path.join(PATH_BASE, 'srptools', '__init__.py'))
-    version = re.search('VERSION = \(([^)]+)\)', contents)
+    # use raw string for regex to avoid invalid escape sequence warnings
+    version = re.search(r'VERSION = \(([^)]+)\)', contents)
     version = version.group(1).replace(', ', '.').strip()
     return version
 

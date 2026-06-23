@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "srptools"
+version = "1.0.1"
+description = "Tools to implement Secure Remote Password (SRP) authentication"
+readme = "README.rst"
+license = { file = "LICENSE" }
+requires-python = ">=2.7"
+dependencies = ["six"]
+
+[project.optional-dependencies]
+cli = ["click>=2.0"]
+tests = ["pytest"]
+
+[project.scripts]
+srptools = "srptools.cli:main"
+
+
